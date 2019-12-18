@@ -1,6 +1,6 @@
 {
   "name": "mapish",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "A serializable, string key map",
   "main": "dist/source/index.js",
   "types": "dist/source/index.d.ts",
