@@ -1,11 +1,7 @@
 import { Mapish } from "../source";
 
-const map1 = new Mapish<string | number | boolean>([
-  ["a", 1],
-  ["b", false],
-  ["c", "3"]
-]);
+const map = new Mapish<string>([["sean", "hello"], ["arthur", "bye"]]);
 
 test("simple map stringify", () => {
-  expect(JSON.stringify(map1)).toBe(`{"a":1,"b":false,"c":"3"}`);
+  expect(JSON.stringify(map)).toBe(`{"sean":"hello","arthur":"bye"}`);
 });
