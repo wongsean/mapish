@@ -16,6 +16,26 @@ export class Mapish<T> extends Map<string, T> {
     const entries = items.map(item => [iterator(item), item] as const);
     return new Mapish(entries);
   }
+
+  static groupBy<T>(
+    items: readonly T[],
+    iterator: (item: T) => string
+  ): Mapish<T[]> {
+    return items.reduce((map, item) => {
+      const key = iterator(item);
+
+      if (map.has(key)) {
+        map.get(key)!.push(item);
+      } else {
+        map.set(key, [item]);
+      }
+      return map;
+    }, new Mapish<T[]>());
+  }
+
+  static fromObject<T>(object: Record<string, T>): Mapish<T> {
+    return new Mapish(Object.entries(object));
+  }
 }
 
 export default Mapish;
