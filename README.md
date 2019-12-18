@@ -4,6 +4,10 @@ A serializable, string key map
 
 ## Usage
 
+```
+npm i mapish
+```
+
 Extremely like creating a map, and it's serializable.
 
 ```typescript
