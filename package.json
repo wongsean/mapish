@@ -1,0 +1,28 @@
+{
+  "name": "mapish",
+  "version": "0.1.0",
+  "description": "A serializable, string key map",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/wongsean/mapish"
+  },
+  "keywords": [
+    "serializable",
+    "string-key",
+    "map"
+  ],
+  "author": "Sean Wong",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.17",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.2.0",
+    "typescript": "^3.7.3"
+  }
+}
