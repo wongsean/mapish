@@ -13,7 +13,10 @@ Extremely like creating a map, and it's serializable.
 ```typescript
 import { Mapish } from "mapish";
 
-const map = new Mapish<string>([["sean", "hello"], ["arthur", "bye"]]);
+const map = new Mapish<string>([
+  ["sean", "hello"],
+  ["arthur", "bye"]
+]);
 
 JSON.stringify(map); // => `{"sean":"hello","arthur":"bye"}`
 ```
