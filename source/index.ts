@@ -43,5 +43,3 @@ export class Mapish<T> extends Map<string, T> {
     return new Mapish(Object.entries(object));
   }
 }
-
-export default Mapish;
