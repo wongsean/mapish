@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "github.com/wongsean/mapish"
+    "url": "https://github.com/wongsean/mapish.git"
   },
   "keywords": [
     "serializable",
@@ -25,5 +25,8 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.3"
+  },
+  "bugs": {
+    "url": "https://github.com/wongsean/mapish/issues"
   }
 }
