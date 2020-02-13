@@ -19,7 +19,9 @@ export class Mapish<T> extends Map<string, T> {
     items: readonly T[],
     iterator: (item: T) => string
   ): Mapish<T> {
-    const entries = items.map(item => [iterator(item), item] as const);
+    const entries = items.map(
+      item => [iterator(item).toString(), item] as const
+    );
     return new Mapish(entries);
   }
 
@@ -28,7 +30,7 @@ export class Mapish<T> extends Map<string, T> {
     iterator: (item: T) => string
   ): Mapish<T[]> {
     return items.reduce((map, item) => {
-      const key = iterator(item);
+      const key = iterator(item).toString();
 
       if (map.has(key)) {
         map.get(key)!.push(item);
