@@ -9,6 +9,12 @@ export class Mapish<T> extends Map<string, T> {
     return this.toJSON();
   }
 
+  toArray<V>(mapper: (value: T, key: string, map: this) => V): V[] {
+    const array = new Array<V>();
+    this.forEach((v, k) => array.push(mapper(v, k, this)));
+    return array;
+  }
+
   map<V>(mapper: (value: T, key: string, map: this) => V): Mapish<V> {
     const entries: [string, V][] = [];
     this.forEach((v, k) => entries.push([k, mapper(v, k, this)]));
