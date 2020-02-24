@@ -21,7 +21,7 @@ const map = new Mapish<string>([
 JSON.stringify(map); // => `{"sean":"hello","arthur":"bye"}`
 ```
 
-Simple helper functions `keyBy`, `groupBy` and `fromObject` to create a Mapish instance, works just like lodash.
+Simple helper static functions `keyBy`, `groupBy` and `fromObject` to create a Mapish instance, works just like lodash.
 
 ```typescript
 import { Mapish } from "mapish";
@@ -54,4 +54,17 @@ const object = { sean: "hello", arthur: "bye" };
 const objectMap = Mapish.fromObject(object);
 
 JSON.stringify(map); // => `{"sean":"hello","arthur":"bye"}`
+```
+
+And more useful instance functions like `toArray` and advanced `get`
+
+```typescript
+const map = new Mapish([
+  ["key1", "value1"],
+  ["key2", "value2"]
+]);
+
+map.toArray((v, k) => v + " " + k); // => ["key1 value1", "key2 value2"]
+
+map.get("key1", "key2"); // => ['value1', 'value2']
 ```

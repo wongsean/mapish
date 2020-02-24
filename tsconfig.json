@@ -20,5 +20,5 @@
 
     "typeRoots": ["./node_modules/@types", "./source/types", "./test/types"]
   },
-  "include": ["source", "test"]
+  "include": ["source", "test", "test"]
 }
