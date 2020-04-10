@@ -21,10 +21,31 @@ export class Mapish<T> extends Map<string, T> {
     return "[object Mapish]";
   }
 
-  toArray<V>(mapper: (value: T, key: string, map: this) => V): V[] {
-    const array = new Array<V>();
-    this.forEach((v, k) => array.push(mapper(v, k, this)));
-    return array;
+  keepIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T> {
+    const entries: [string, T][] = [];
+    this.forEach((v, k) => {
+      if (predict(v, k, this)) {
+        entries.push([k, v]);
+      }
+    });
+    return new Mapish(entries);
+  }
+
+  deleteIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T> {
+    const entries: [string, T][] = [];
+    this.forEach((v, k) => {
+      if (!predict(v, k, this)) {
+        entries.push([k, v]);
+      }
+    });
+    return new Mapish(entries);
+  }
+
+  /**
+   * @deprecated use Mapish#toMap instead
+   */
+  toArray<E>(mapper: (value: T, key: string, map: this) => E): E[] {
+    return this.map(mapper);
   }
 
   get(key: string): T | undefined;
@@ -39,12 +60,23 @@ export class Mapish<T> extends Map<string, T> {
       return super.get(key);
     }
 
-    return keys.map(key => this.get(key)) as any;
+    return keys.map((key) => this.get(key)) as any;
   }
 
-  map<V>(mapper: (value: T, key: string, map: this) => V): Mapish<V> {
+  map<E>(mapper: (value: T, key: string, map: this) => E): E[] {
+    const array: E[] = [];
+    this.forEach((v, k) => array.push(mapper(v, k, this)));
+    return array;
+  }
+
+  mapValues<V>(mapper: (value: T, key: string, map: this) => V): Mapish<V> {
     const entries: [string, V][] = [];
     this.forEach((v, k) => entries.push([k, mapper(v, k, this)]));
+    return new Mapish(entries);
+  }
+  mapKeys(mapper: (value: T, key: string, map: this) => string): Mapish<T> {
+    const entries: [string, T][] = [];
+    this.forEach((v, k) => entries.push([mapper(v, k, this), v]));
     return new Mapish(entries);
   }
 
@@ -53,7 +85,7 @@ export class Mapish<T> extends Map<string, T> {
     iterator: (item: T) => string
   ): Mapish<T> {
     const entries = items.map(
-      item => [iterator(item).toString(), item] as const
+      (item) => [iterator(item).toString(), item] as const
     );
     return new Mapish(entries);
   }
