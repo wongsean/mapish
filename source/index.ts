@@ -21,6 +21,10 @@ export class Mapish<T> extends Map<string, T> {
     return "[object Mapish]";
   }
 
+  keepIf<O extends T>(
+    predict: (value: T, key: string, map: this) => value is O
+  ): Mapish<O>;
+  keepIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T>;
   keepIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T> {
     const entries: [string, T][] = [];
     this.forEach((v, k) => {
@@ -31,6 +35,10 @@ export class Mapish<T> extends Map<string, T> {
     return new Mapish(entries);
   }
 
+  deleteIf<O extends T>(
+    predict: (value: T, key: string, map: this) => value is O
+  ): Mapish<Exclude<T, O>>;
+  deleteIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T>;
   deleteIf(predict: (value: T, key: string, map: this) => boolean): Mapish<T> {
     const entries: [string, T][] = [];
     this.forEach((v, k) => {
