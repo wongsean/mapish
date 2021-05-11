@@ -50,7 +50,7 @@ export class Mapish<T> extends Map<string, T> {
   }
 
   /**
-   * @deprecated use Mapish#toMap instead
+   * @deprecated use Mapish#map instead
    */
   toArray<E>(mapper: (value: T, key: string, map: this) => E): E[] {
     return this.map(mapper);
